@@ -36,6 +36,14 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/students", studentRoutes);
 app.use("/api/admin", adminRoutes);
+// Ensure the path matches the pluralization and structure of your request
+app.get('/api/students/division/:divisionId', (req, res) => {
+  const { divisionId } = req.params;
+  const { subDiv } = req.query; // This will capture "X"
+  
+  // Logic to find students...
+  res.status(200).json({ message: "Data found" });
+});
 
 // Health check
 app.get("/", (req, res) => {
