@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-base-900: #0f172a;
+  --color-base-800: #1e293b;
+  --color-base-700: #334155;
+  --color-success-500: #22c55e;
+  --color-error-500: #ef4444;
+}
+
+@layer base {
+  body {
+    @apply bg-base-900 text-gray-100 min-h-screen font-sans antialiased;
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatCard {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulseOrb {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+}
+
+.hero-enter {
+  animation: revealUp 700ms ease-out both;
+}
+
+.form-enter {
+  animation: revealUp 800ms ease-out 120ms both;
+}
+
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(34, 211, 238, 0.12), transparent 34%),
+    radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.12), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 24px 24px, 24px 24px;
+}
+
+.tech-card {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(15, 23, 42, 0.72);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: revealUp 500ms ease-out var(--delay), floatCard 3.6s ease-in-out calc(var(--delay) + 800ms) infinite;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: color-mix(in srgb, var(--tech-color) 60%, white 20%);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.tech-orb {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--tech-color) 20%, transparent);
+  color: var(--tech-color);
+  animation: pulseOrb 2.8s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .tech-card {
+    padding: 10px;
+  }
+}
